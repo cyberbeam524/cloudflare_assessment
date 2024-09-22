@@ -4,3 +4,4 @@ backup
 notes.md
 .wrangler
 .DS_Store
+.env
