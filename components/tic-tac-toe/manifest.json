@@ -1,0 +1,40 @@
+{
+  "name": "tic-tac-toe",
+  "namespace": "tic-tac-toe",
+  "description": "Returns an tic-tac-toe embed",
+  "icon": "assets/icon.svg",
+  "permissions": {
+    "access_client_kv": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    },
+    "access_extended_client_kv": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    },
+    "execute_unsafe_scripts": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    },
+    "client_network_requests": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    },
+    "server_network_requests": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    },
+    "serve_static_files": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    },
+    "provide_server_functionality": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    },
+    "provide_widget": {
+      "description": "This permission is used to facilitate better a user experience.",
+      "required": false
+    }
+  }
+}
