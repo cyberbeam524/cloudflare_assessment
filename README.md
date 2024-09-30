@@ -9,22 +9,23 @@
 ### Key Features:
 - Choice of X or O for the player.
 <img src="./images/firstView.png" style="width:40%">
+
 - Real-time interaction on a 3x3 grid.
 - AI adversary powered by a minimax algorithm served from a deployed Cloudflare Worker (with low latency responses).
 - Secure communication between the browser and the backend.
 - Clear indicator for the next turn and declaration of a winner or a draw using a modal.
 
-After Adversary has made move as O and is waiting for player input:
+***After Adversary has made move as O and is waiting for player input***:
 
 <img src="./images/afterSelectionX.png" style="width:40%">
 
 
-Sample of Adversary winning:
+***Sample of Adversary winning***:
 
 <img src="./images/AdversaryWinX.png" style="width:40%">
 
 
-Sample of draw:
+***Sample of draw***:
 
 <img src="./images/drawEnding.png" style="width:40%">
 
