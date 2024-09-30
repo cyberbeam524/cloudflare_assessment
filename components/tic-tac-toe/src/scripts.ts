@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateMessage = () => {
       if (!isGameOver) {
-        messageDisplay.textContent = isPlayerTurn ? 'Your turn ('+playerSymbol+')' : 'AI turn ('+aiSymbol+')';
+        messageDisplay.textContent = isPlayerTurn ? 'Your turn ('+playerSymbol+')' : 'Adversary turn ('+aiSymbol+')';
       }
     };
 
@@ -178,8 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (checkWinner(aiSymbol)) {
             isGameOver = true;
-            showWinnerModal('AI ' + aiSymbol + ' wins!');
-            messageDisplay.textContent = 'AI ' + aiSymbol + ' wins!';
+            showWinnerModal('Adversary ' + aiSymbol + ' wins!');
+            messageDisplay.textContent = 'Adversary ' + aiSymbol + ' wins!';
             return;
           } else if (checkDraw()) {
             isGameOver = true;
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const data = await response.json();
           return data.move;
         } catch (error) {
-          console.error('Error fetching the AI move:', error);
+          console.error('Error fetching the Adversary move:', error);
           return null;
         }
       }
