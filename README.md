@@ -3,7 +3,7 @@
 # Cloudflare Assignment Architecture
 
 ### App Architecture
-<img src="./images/arch.png" style="width:50%">
+<img src="./images/arch.png" style="width:70%">
 
 
 ### Key Features:
@@ -15,12 +15,17 @@
 - Clear indicator for the next turn and declaration of a winner or a draw using a modal.
 
 After Adversary has made move as O and is waiting for player input:
+
 <img src="./images/afterSelectionX.png" style="width:40%">
 
+
 Sample of Adversary winning:
+
 <img src="./images/AdversaryWinX.png" style="width:40%">
 
+
 Sample of draw:
+
 <img src="./images/drawEnding.png" style="width:40%">
 
 Sadly, with min max algorithm, I could never win to get a screenshot of myself winning. Real challenge :)
