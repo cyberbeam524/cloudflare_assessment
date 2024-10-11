@@ -48,6 +48,8 @@ Sadly, with min max algorithm, I could never win to get a screenshot of myself w
 - managed-components
 - tailwind (for styling)
 - Cloudflare worker
+- KV Storage for caching
+- K6 for load testing
 
 ## Running locally
 
@@ -71,6 +73,10 @@ npm run dev
 - [x] Create and deploy cloudflare worker to return moves:
     - [x] random moves
     - [x] min max algorithm for smarter moves
+- [x] Load testing with k6 to find performance locally and deployed version
+- [x] Find bottlenecks and ways to improve speed of response with cloudflare native existing solutions
+    - [x] Caching
+    - [x] Logging to get cache hits and misses
 
 References:
 - Post request to cloudflare worker: https://developers.cloudflare.com/workers/examples/post-json/

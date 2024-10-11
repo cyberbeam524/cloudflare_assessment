@@ -194,24 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    const fetchNextMove = async (board) => {
-      try {
-        const workerUrl = 'http://127.0.0.1:8787/'; // Replace with your Worker URL
-        const response = await fetch(workerUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ board, player: aiSymbol }),
-        });
-
-        const data = await response.json();
-        return data.move;
-      } catch (error) {
-        console.error('Error fetching next move from Cloudflare Worker:', error);
-        return null;
-      }
-    };
 
     async function getNextMove(board) {
         try {

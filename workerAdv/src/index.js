@@ -7,9 +7,53 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+// import { env } from '@cloudflare/workers-types'; // Make sure to use this for KV
+
+// Custom mock KV store for local testing
+class MockKVStore {
+	constructor() {
+	  this.store = new Map(); // Use Map to store key-value pairs
+	}
+  
+	async put(key, value) {
+	  console.log(`MockKVStore: storing key=${key}, value=${value}`);
+	  this.store.set(key, value);
+	}
+  
+	async get(key) {
+	  if (this.store.has(key)) {
+		console.log(`MockKVStore: found value for key=${key}`);
+		return this.store.get(key);
+	  } else {
+		console.log(`MockKVStore: no value found for key=${key}`);
+		return null; // Simulate KV behavior if the key is not found
+	  }
+	}
+  
+	async delete(key) {
+	  console.log(`MockKVStore: deleting key=${key}`);
+	  this.store.delete(key);
+	}
+  }
+  
+  const mockKVStore = new MockKVStore();  // Instantiate mock KV store
+
+
 
 export default {
-	async fetch(request) {
+	async fetch(request, env) {
+
+		console.log('Incoming request:', request.method, request.url);
+
+		if (!env.tictactoe) {
+			console.log('KV Namespace not available');
+		  }else{
+			console.log('tictactoe AVAILABLE');
+		  }
+
+		const kvStore = env.tictactoe || mockKVStore;
+
+
 	  if (request.method === 'OPTIONS') {
 		// Handle CORS preflight requests
 		return handleOptions(request);
@@ -17,21 +61,48 @@ export default {
   
 	  if (request.method === 'POST') {
 		const { board, player } = await request.json();
-  
+
+		const cacheKey = `board_${board.join('')}_player_${player}`;
+
+		// Try to fetch from KV Store
+		const cachedResponse = await kvStore.get(cacheKey);
+		if (cachedResponse) {
+			console.log('Cache hit:', cacheKey);
+			// Parse the cached value (assuming it's stored as JSON string)
+			return new Response(cachedResponse, {
+				headers: { 'Content-Type': 'application/json' },
+			});
+		}else{
+				console.log('Cache miss:', cacheKey);
+			}
+	
+
+		// Process as if for the first time
 		// Validate the board
 		if (!isValidBoard(board)) {
-		  return new Response('Invalid board', { status: 400, headers: corsHeaders });
+			console.error('Invalid board:', board);
+		  	return new Response('Invalid board', { status: 400, headers: corsHeaders });
 		}
+		console.log('Valid board received. Player:', player);
   
 		// Get the next smart move using Minimax or random logic
 		// const nextMove = getRandomMove(board);
 		const nextMove = findBestMove(board, player);
+		console.log('Next move calculated:', nextMove);
+
+		// Create the response
+		const response = new Response(JSON.stringify({ move: nextMove }), {
+			headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+		  });
+
+		// Cache the response in KV Store
+		await kvStore.put(cacheKey, JSON.stringify({ move: nextMove }));
+		// console.log(kvStore);
   
 		// Return the move as a JSON response with CORS headers
-		return new Response(JSON.stringify({ move: nextMove }), {
-		  headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-		});
+		return response;
 	  } else {
+		console.warn('Invalid method received:', request.method);
 		return new Response('Method not allowed', {
 		  status: 405,
 		  headers: corsHeaders,
@@ -53,6 +124,7 @@ export default {
 		request.headers.get('Access-Control-Request-Method') !== null &&
 		request.headers.get('Access-Control-Request-Headers') !== null) {
 	  // Handle CORS preflight request
+	  console.log('Handling CORS preflight');
 	  return new Response(null, {
 		headers: {
 		  ...corsHeaders,
@@ -76,6 +148,7 @@ export default {
 	if (!Array.isArray(board) || board.length !== 9) return false;
 	for (const cell of board) {
 	  if (cell !== 'X' && cell !== 'O' && cell !== null) {
+		console.error('Invalid cell value:', cell);
 		return false;
 	  }
 	}
@@ -84,6 +157,7 @@ export default {
   
   // Function to evaluate the board and find the best move
   function findBestMove(board, player) {
+	console.log('Evaluating best move for player:', player);
 	let bestVal = -Infinity;
 	let bestMove = -1;
   
@@ -99,7 +173,7 @@ export default {
 		}
 	  }
 	}
-  
+	console.log('Best move found:', bestMove);
 	return bestMove;
   }
   

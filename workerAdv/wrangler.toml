@@ -1,3 +1,9 @@
 name = "workeradv"
 main = "src/index.js"
 compatibility_date = "2024-09-22"
+# wrangler.toml (wrangler v3.78.6^)
+[observability]
+enabled = true
+[[kv_namespaces]]
+binding = "tictactoe"
+id = "240e7691dd344ec7971d0ff959a68745"

@@ -39,8 +39,7 @@ export default async function (manager: Manager, _settings: ComponentSettings) {
       }
   
       //Send the board and player information to the Cloudflare Worker
-      const workerUrl = WORKERURL
-      const response = await manager.fetch(workerUrl, {
+      const response = await manager.fetch(WORKERURL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
