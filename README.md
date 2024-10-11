@@ -87,15 +87,15 @@ Key Improvements:
 ## Viewing Logs:
 All logs for deployed Cloudflare worker:
 
-<img src="./images/logs/alllogs.png" style="width:40%">
+<img src="./images/logs/alllogs.png" style="width:70%">
 
 Filtered Cache hit logs:
 
-<img src="./images/logs/cachehit.png" style="width:40%">
+<img src="./images/logs/cachehit.png" style="width:70%">
 
 Filtered Cache miss logs:
 
-<img src="./images/logs/cachemiss.png" style="width:40%">
+<img src="./images/logs/cachemiss.png" style="width:70%">
 
 ## To Dos:
 - [x] Create tic tac toe frontend using HTML strings (MC usage)
