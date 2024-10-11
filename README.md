@@ -66,6 +66,33 @@ Place http://127.0.0.1:8787 as workeradv_url in .env file.
 npm run dev
 ``` 
 
+## Measuring performance with k6
+
+1. Ensure k6 is installed in your computer with this guide ().
+
+2. Run these commands to run test on local http://localhost:8787/move endpoint:
+```
+cd loadtest
+npm i && k6 run test.js
+```
+
+Performance of deployed Cloudflare worker (Caching vs No Caching layer)
+<img src="./images/performanceresults.png" style="width:70%">
+
+Key Improvements:
+- Avg Request Duration: Improved from 75.87ms to 28.81ms.
+- HTTP Request Blocked: Improved from 2.57ms to 799.68µs.
+- Total Requests: Increased from 5031 to 5274.
+
+## Viewing Logs:
+All logs for deployed Cloudflare worker:
+<img src="./images/logs/alllogs.png" style="width:40%">
+
+Filtered Cache hit logs:
+<img src="./images/logs/cachehit.png" style="width:40%">
+
+Filtered Cache miss logs:
+<img src="./images/logs/cachemiss.png" style="width:40%">
 
 ## To Dos:
 - [x] Create tic tac toe frontend using HTML strings (MC usage)

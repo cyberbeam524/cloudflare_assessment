@@ -10,8 +10,8 @@ export let options = {
 };
 
 export default function () {
-  // let url = 'http://localhost:8787/move';
-  let url = 'https://workeradv.maaruni505.workers.dev/move';
+  let url = 'http://localhost:8787/move';
+  // let url = 'https://workeradv.maaruni505.workers.dev/move';
   let payload = JSON.stringify({
     board: [null, 'X', 'O', null, 'X', null, 'O', null, null],
     player: 'X'
