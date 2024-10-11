@@ -76,7 +76,7 @@ cd loadtest
 npm i && k6 run test.js
 ```
 
-Performance of deployed Cloudflare worker (Caching vs No Caching layer)
+### Performance of deployed Cloudflare worker (Caching vs No Caching layer)
 <img src="./images/performanceresults.png" style="width:70%">
 
 Key Improvements:
@@ -86,12 +86,15 @@ Key Improvements:
 
 ## Viewing Logs:
 All logs for deployed Cloudflare worker:
+
 <img src="./images/logs/alllogs.png" style="width:40%">
 
 Filtered Cache hit logs:
+
 <img src="./images/logs/cachehit.png" style="width:40%">
 
 Filtered Cache miss logs:
+
 <img src="./images/logs/cachemiss.png" style="width:40%">
 
 ## To Dos:
