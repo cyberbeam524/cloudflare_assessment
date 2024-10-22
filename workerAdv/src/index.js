@@ -62,7 +62,12 @@ export default {
 	  if (request.method === 'POST') {
 		const { board, player } = await request.json();
 
-		const cacheKey = `board_${board.join('')}_player_${player}`;
+		//example of poor cache strategy that give inaccurate results:
+		// const cacheKey = `board_${board.join('')}_player_${player}`;
+		  const boardState = board
+		  .map(cell => (cell === 'X' || cell === 'O' ? cell : '_')) // Ensures other values apart from x and o are replaced by '_'
+		  .join('');
+		const cacheKey = `board_${boardState}_player_${player}`;
 
 		// Try to fetch from KV Store
 		const cachedResponse = await kvStore.get(cacheKey);
